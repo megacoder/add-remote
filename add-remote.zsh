@@ -27,4 +27,6 @@ local	) URL="ssh://reynolds@git.darkzone.un:2223/home/vault/depot/${REPO}";;
 	echo "Boss, I don't know about any ${CHANNEL}-related URL." >&2
 	exit 1
 esac
-exec ${DEBUG} /bin/git remote add --mirror=push "${CHANNEL}" "${URL}"
+${DEBUG} /bin/git remote add --mirror=push "${CHANNEL}" "${URL}"
+remotes=$( /bin/git remote | sort | tr '\n' ' ' )
+${DEBUG} /bin/git config remotes.default "${remotes}"
